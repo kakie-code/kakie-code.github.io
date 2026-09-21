@@ -1,7 +1,7 @@
 # Comp sci 30 stuff
 
 ## Demos
-- I'll put the first demo here in a bit
+- [Chessboard Demo](chessboard)
 
 ## Projects
 - first assignment will go here
