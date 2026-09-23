@@ -7,7 +7,7 @@ let x, w, y;
 async function setup() {
   createCanvas(windowWidth, windowHeight);
   speed = 10;
-  x= 10;
+  x= 100;
   y= 10;
   w=100;
 }
@@ -32,7 +32,8 @@ function drawMovingSquare(){
     x-= speed; 
   }
 
-//   else if (x <= windowWidth){
-//     y-= speed;
-//   }
+  if (x === 0){
+    y-= speed;
+  }
 }
+ 
