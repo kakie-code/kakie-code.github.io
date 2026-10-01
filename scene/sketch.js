@@ -37,8 +37,8 @@ function draw() {
       bgcolor = "lightpink";
     }
   }
-  
   background(bgcolor);
+
   if (gameStarted === false) {
     showStartScreen();
   }
@@ -50,7 +50,6 @@ function draw() {
     checkForFruit();
     moveCharacter();
     didYouWin();
-    // windowResized();
   }
 }
 
@@ -77,6 +76,12 @@ function startGame() {
   updateFruitCoordinates();
   gameStarted = true;
   loop();
+  score = 0;
+  w = 20;
+  r = 10;
+  x = width/2;
+  y = height/2;
+  bgcolor = "green";
 }
 
 function showFruit() {
