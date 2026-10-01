@@ -3,9 +3,9 @@
 // September 22, 2026
 //
 // Extra for Experts:
-// - describe what you did to take this project "above and beyond"
+// - idk what to write
 // used https://p5js.org/examples/Games-Snake/
-// extra for experts is yet to be done
+
 
 let gameStarted = false;
 let score = 0;
