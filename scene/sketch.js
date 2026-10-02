@@ -3,7 +3,13 @@
 // September 22, 2026
 //
 // Extra for Experts:
-// - idk what to write
+// - i used "storeItem" so i could use it for the highscore 
+// - i added a "getItem" so i could get the previous score from the "storeItem"
+// - i used "rectMode(CENTER)" to make the rectangle draw from the center and not the corner
+// - used "dist" to find out the distance between two points 
+// - i also used text to explane to the player what to do
+// - i also used  "resizeCanvas" to change the canvas size to adjust to the screen
+// - i used "noloop" and "loop" to stop and start the draw loop when needed
 // used https://p5js.org/examples/Games-Snake/
 
 
