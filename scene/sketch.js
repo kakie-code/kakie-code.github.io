@@ -12,7 +12,7 @@
 // - i used "noloop" and "loop" to stop and start the draw loop when needed
 // used https://p5js.org/examples/Games-Snake/
 
-
+// defining the things 
 let gameStarted = false;
 let score = 0;
 let highScore;
@@ -23,6 +23,7 @@ let x, cx, y, cy;
 let speed = 3;
 let bgcolor = "green";
 
+// setup where things only happen once 
 function setup() {
   createCanvas(windowWidth, windowHeight);
   textAlign(CENTER, CENTER);
@@ -36,6 +37,7 @@ function setup() {
   
 }
 
+// draw loop where all other functions are called
 function draw() {
   if (score >= 5){
     bgcolor = "lightblue";
@@ -59,10 +61,14 @@ function draw() {
   }
 }
 
+// Defining functions 
+
+// resizes window 
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
 } 
 
+// shows start screen 
 function showStartScreen() {
   noStroke();
   fill(32);
@@ -77,7 +83,7 @@ function showStartScreen() {
   noLoop();
 }
 
-
+// starts game 
 function startGame() {
   updateFruitCoordinates();
   gameStarted = true;
@@ -90,26 +96,34 @@ function startGame() {
   bgcolor = "green";
 }
 
+
+// shows fruit
 function showFruit() {
   fruit = circle(cx, cy, r);
 }
 
+
+// shows character 
 function showCharacter() {
   character = square(x, y, w);
 }
 
+// checks to see if you hit a edge
 function checkForCollision() {
   if ( x >= width || x <= 0 || y >= height || y <= 0  ) {
     gameOver();
   }
 }
 
+// checks if mouse was clicked
 function mousePressed() {
   if (gameStarted === false) {
     startGame();
   }
 } 
 
+
+// shows that you lost the game
 function gameOver() {
   noStroke();
   fill(32);
@@ -130,6 +144,7 @@ Click to play again.`,
   noLoop();
 }
 
+// checks to see if you "ate" a fruit
 function checkForFruit() {
   if ( dist(x, y, cx, cy) < w) {
     w = w + 5;
@@ -138,12 +153,13 @@ function checkForFruit() {
   }
 }
 
+// randomly changes fruits place when eaten 
 function updateFruitCoordinates() {
   cx = random(30, width - 30);
   cy = random(30, height - 30);
 }
 
-
+// so you can move the character 
 function moveCharacter() {
   if (keyIsDown('ArrowUp') === true || keyIsDown('w') === true) {
     y -= speed;
@@ -159,6 +175,7 @@ function moveCharacter() {
   }
 }
 
+// asks if you won and if so then shows your score and ends the game 
 function didYouWin(){
   if ( w >= width){
     noStroke();
