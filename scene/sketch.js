@@ -2,6 +2,7 @@
 // Harwaa Al Ibrahim
 // September 22, 2026
 //
+// - also i worked on p5.js first so i copied it off of there
 // Extra for Experts:
 // - i used "storeItem" so i could use it for the highscore 
 // - i added a "getItem" so i could get the previous score from the "storeItem"
