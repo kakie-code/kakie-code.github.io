@@ -35,13 +35,13 @@ function draw() {
   for (let theRect of terrain){
     rect(theRect.x, theRect.y, theRect.w, theRect.h);
 
-    // rect(x,  y, 100, 100);
+    
   }
 
 
   //circle thing
-  let theX = mouseX;
-  let theY = height - terrain[theX].h;
+  let theX = 25;
+  let theY = height - terrain[theX].h - 15;
   // console.log(terrain[theX]);
   fill("white");
   circle(theX, theY, 30);
