@@ -3,23 +3,24 @@
 // 
 
 
-let x, y;
+let x1, y1, theCircle;
 let hit = false;
 let terrain = [];
 let NUMBER_OF_RECTS;
-
+let gameStarted = false;
+let theX, theY;
 async function setup() {
   createCanvas(windowWidth, windowHeight);
   NUMBER_OF_RECTS = width;
   generateTerrain();
   
-  if (!hit){
-    x = 10;
-    y += 1;
-  }
-  if (hit){
-    x = yh;
-  }
+  // if (!hit){
+  //   x = 10;
+  //   y += 1;
+  // }
+  // if (hit){
+  //   x = yh;
+  // }
   
 
 
@@ -28,25 +29,63 @@ async function setup() {
 
 function draw() {
   background("skyblue");
-
   stroke("green");
   fill("green");
-  moveCharacter();
+
   for (let theRect of terrain){
     rect(theRect.x, theRect.y, theRect.w, theRect.h);
 
+  }
+  
+  makeCharacter();
+  
+  if (gameStarted === false){
+    showStartScreen();
     
   }
-
-
-  //circle thing
-  let theX = 25;
-  let theY = height - terrain[theX].h - 15;
-  // console.log(terrain[theX]);
-  fill("white");
-  circle(theX, theY, 30);
+  
+  else {  
+    moveCharacter();
+  }
+  
 
 }
+
+// shows start screen 
+function showStartScreen() {
+  noStroke();
+  fill(32);
+  rectMode(CENTER);
+  rect(width/2, height/2, 300, 300);
+  fill(255);
+  text(
+    'Click to play.\nUse arrow keys to move.',
+    width / 2,
+    height / 2
+  );
+
+  noLoop();
+}
+
+function makeCharacter(){
+  //circle thing
+  theX = 25;
+  theY = height - terrain[theX].h - 15;
+  fill("white");
+  theCircle = circle(theX, theY, 30);
+}
+
+function mousePressed(){
+  if (gameStarted === false) {
+    startGame();
+  }
+}
+
+function startGame(){
+  gameStarted = true;
+  loop();
+}
+
 
 function generateTerrain() {
   let theWidth = width/NUMBER_OF_RECTS;
@@ -62,16 +101,13 @@ function generateTerrain() {
 
 function moveCharacter() {
   if (keyIsDown('ArrowUp') === true || keyIsDown('w') === true) {
-    y -= speed;
-  }
-  if (keyIsDown('ArrowDown') === true || keyIsDown('s') === true) {
-    y += speed;
+    theY -= speed;
   }
   if (keyIsDown('ArrowRight') === true || keyIsDown('d') === true) {
-    x += speed;
+    theX += speed;
   }
   if (keyIsDown('ArrowLeft') === true || keyIsDown('a') === true) {
-    x -= speed;
+    theX -= speed;
   }
 }
 
