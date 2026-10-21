@@ -3,12 +3,13 @@
 // 
 
 
-let x1, y1, theCircle;
+
 let hit = false;
 let terrain = [];
 let NUMBER_OF_RECTS;
 let gameStarted = false;
 let theX, theY;
+
 async function setup() {
   createCanvas(windowWidth, windowHeight);
   NUMBER_OF_RECTS = width;
@@ -72,7 +73,7 @@ function makeCharacter(){
   theX = 25;
   theY = height - terrain[theX].h - 15;
   fill("white");
-  theCircle = circle(theX, theY, 30);
+  circle(theX, theY, 30);
 }
 
 function mousePressed(){
