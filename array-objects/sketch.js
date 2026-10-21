@@ -14,16 +14,6 @@ async function setup() {
   createCanvas(windowWidth, windowHeight);
   NUMBER_OF_RECTS = width;
   generateTerrain();
-  
-  // if (!hit){
-  //   x = 10;
-  //   y += 1;
-  // }
-  // if (hit){
-  //   x = yh;
-  // }
-  
-
 
   
 }
@@ -35,21 +25,15 @@ function draw() {
 
   for (let theRect of terrain){
     rect(theRect.x, theRect.y, theRect.w, theRect.h);
-
   }
-  
   makeCharacter();
-  
   if (gameStarted === false){
     showStartScreen();
-    
   }
-  
   else {  
     moveCharacter();
   }
   
-
 }
 
 // shows start screen 
@@ -65,7 +49,7 @@ function showStartScreen() {
     height / 2
   );
 
-  noLoop();
+  // noLoop();
 }
 
 function makeCharacter(){
