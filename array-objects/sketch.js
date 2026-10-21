@@ -3,19 +3,20 @@
 // 
 
 
-
 let hit = false;
 let terrain = [];
 let NUMBER_OF_RECTS;
 let gameStarted = false;
 let theX, theY;
+let jump = false;
+let speed = 5;
+let waitTime = 1000;
 
 async function setup() {
   createCanvas(windowWidth, windowHeight);
   NUMBER_OF_RECTS = width;
   generateTerrain();
 
-  
 }
 
 function draw() {
@@ -32,12 +33,15 @@ function draw() {
   }
   else {  
     moveCharacter();
+    doWeJump();
   }
   
 }
 
 // shows start screen 
 function showStartScreen() {
+  push();
+
   noStroke();
   fill(32);
   rectMode(CENTER);
@@ -49,7 +53,9 @@ function showStartScreen() {
     height / 2
   );
 
-  // noLoop();
+  noLoop();
+
+  pop();
 }
 
 function makeCharacter(){
@@ -84,9 +90,25 @@ function generateTerrain() {
   }
 }
 
+function doWeJump(){
+  if (jump === true){
+    while (theY <= terrain.h + 20){
+      theY++;
+    }
+    if (theY > terrain.h + 20){
+      while (theY){
+        theY--;
+      }
+    }
+  }
+  
+
+}
+
 function moveCharacter() {
   if (keyIsDown('ArrowUp') === true || keyIsDown('w') === true) {
-    theY -= speed;
+    jump = true;
+
   }
   if (keyIsDown('ArrowRight') === true || keyIsDown('d') === true) {
     theX += speed;
