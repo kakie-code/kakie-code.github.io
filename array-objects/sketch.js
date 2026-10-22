@@ -7,16 +7,18 @@ let hit = false;
 let terrain = [];
 let NUMBER_OF_RECTS;
 let gameStarted = false;
-let theX, theY;
+let theX = 25;
+let theY;
 let jump = false;
 let speed = 5;
 let waitTime = 1000;
+let r = 30;
 
 async function setup() {
   createCanvas(windowWidth, windowHeight);
   NUMBER_OF_RECTS = width;
   generateTerrain();
-
+  theY = height - terrain[theX].h - 15;
 }
 
 function draw() {
@@ -34,6 +36,7 @@ function draw() {
   else {  
     moveCharacter();
     doWeJump();
+    checkForCollision();
   }
   
 }
@@ -49,8 +52,8 @@ function showStartScreen() {
   fill(255);
   text(
     'Click to play.\nUse arrow keys to move.',
-    width / 2,
-    height / 2
+    width/2,
+    height/2
   );
 
   noLoop();
@@ -60,8 +63,8 @@ function showStartScreen() {
 
 function makeCharacter(){
   //circle thing
-  theX = 25;
-  theY = height - terrain[theX].h - 15;
+  // theX = 25;
+  // theY = height - terrain[theX].h - 15;
   fill("white");
   circle(theX, theY, 30);
 }
@@ -105,16 +108,32 @@ function doWeJump(){
 
 }
 
+function checkForCollision() {
+  if ( theX <= 0 + r ) {
+    theX++;
+  }
+  if ( theX >= width - r){
+    theX--;
+  }
+}
+
 function moveCharacter() {
   if (keyIsDown('ArrowUp') === true || keyIsDown('w') === true) {
     jump = true;
+    theY = height - terrain[theX].h - 15;
 
   }
   if (keyIsDown('ArrowRight') === true || keyIsDown('d') === true) {
+    
+    theY = height - terrain[theX].h - 15;
     theX += speed;
+
   }
   if (keyIsDown('ArrowLeft') === true || keyIsDown('a') === true) {
+    
+    theY = height - terrain[theX].h - 15;
     theX -= speed;
+    
   }
 }
 
