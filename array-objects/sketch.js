@@ -12,7 +12,7 @@ let theY;
 let jump = false;
 let speed = 5;
 let waitTime = 1000;
-let r = 30;
+let r = 30; 
 
 async function setup() {
   createCanvas(windowWidth, windowHeight);
