@@ -9,9 +9,9 @@ let NUMBER_OF_RECTS;
 let gameStarted = false;
 let theX = 25;
 let theY;
-let jump = false;
 let speed = 5;
-let waitTime = 1000;
+let waitTime = 2000;
+let lastDropTime = 0;
 let r = 30; 
 
 async function setup() {
@@ -37,6 +37,8 @@ function draw() {
     moveCharacter();
     doWeJump();
     checkForCollision();
+    dropFruitIfNeeded();
+    
   }
   
 }
@@ -80,6 +82,20 @@ function startGame(){
   loop();
 }
 
+function fallingFruit() {
+  let x = random(0, width);
+  let y = 0;
+  let fruit = circle(x, y, 15);
+  fruit;
+  y++;
+}
+
+function dropFruitIfNeeded(){
+  if (millis() > lastDropTime + waitTime){
+    lastSwapTime = millis();
+    fallingFruit();
+  }
+}
 
 function generateTerrain() {
   let theWidth = width/NUMBER_OF_RECTS;
@@ -93,21 +109,6 @@ function generateTerrain() {
   }
 }
 
-function doWeJump(){
-  if (jump === true){
-    while (theY <= terrain.h + 20){
-      theY++;
-    }
-    if (theY > terrain.h + 20){
-      while (theY){
-        theY--;
-      }
-    }
-  }
-  
-
-}
-
 function checkForCollision() {
   if ( theX <= 0 + r ) {
     theX++;
@@ -119,9 +120,13 @@ function checkForCollision() {
 
 function moveCharacter() {
   if (keyIsDown('ArrowUp') === true || keyIsDown('w') === true) {
-    jump = true;
     theY = height - terrain[theX].h - 15;
-
+    let jump ={
+      gravity: 0.6,
+      velocity: 0,
+      lift: 15,
+    };
+    jump.velocity - jump.lift;
   }
   if (keyIsDown('ArrowRight') === true || keyIsDown('d') === true) {
     
@@ -136,6 +141,8 @@ function moveCharacter() {
     
   }
 }
+
+
 
 function spawnRectangle(leftSide, rectWidth, rectHeight) {
   let theRect = {
