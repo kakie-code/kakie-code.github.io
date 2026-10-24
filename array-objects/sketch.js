@@ -12,20 +12,26 @@ let theY;
 let speed = 5;
 let waitTime = 2000;
 let lastDropTime = 0;
-let r = 30; 
+let r = 45; 
+let fruits = [];
+let fruitR = 7.5;
+let fruitSpeed = 3;
+let score = 0; 
+let highscore;
 
 async function setup() {
   createCanvas(windowWidth, windowHeight);
   NUMBER_OF_RECTS = width;
   generateTerrain();
   theY = height - terrain[theX].h - 15;
+  highScore = getItem('high score');
 }
 
 function draw() {
   background("skyblue");
   stroke("green");
   fill("green");
-
+  console.log(millis());
   for (let theRect of terrain){
     rect(theRect.x, theRect.y, theRect.w, theRect.h);
   }
@@ -35,10 +41,11 @@ function draw() {
   }
   else {  
     moveCharacter();
-    doWeJump();
     checkForCollision();
     dropFruitIfNeeded();
-    
+    updateFruit();
+    // checkForFruit();
+    howLong();
   }
   
 }
@@ -64,9 +71,6 @@ function showStartScreen() {
 }
 
 function makeCharacter(){
-  //circle thing
-  // theX = 25;
-  // theY = height - terrain[theX].h - 15;
   fill("white");
   circle(theX, theY, 30);
 }
@@ -83,11 +87,19 @@ function startGame(){
 }
 
 function fallingFruit() {
-  let x = random(0, width);
-  let y = 0;
-  let fruit = circle(x, y, 15);
-  fruit;
-  y++;
+  let fruit = {
+    x: random(fruitR, width - fruitR),
+    y: 0,
+  };
+  fruits.push(fruit);
+}
+
+function updateFruit(){
+  fill("red");
+  for (let fruit of fruits){
+    fruit.y += fruitSpeed;
+    circle(fruit.x, fruit.y, fruitR*2);
+  }
 }
 
 function dropFruitIfNeeded(){
@@ -96,6 +108,13 @@ function dropFruitIfNeeded(){
     fallingFruit();
   }
 }
+
+// function checkForFruit() {
+//   if (dist(theX, theY, fruits.x, fruits.y) < 0){
+//     score++;
+//   }
+// }
+
 
 function generateTerrain() {
   let theWidth = width/NUMBER_OF_RECTS;
@@ -119,15 +138,9 @@ function checkForCollision() {
 }
 
 function moveCharacter() {
-  if (keyIsDown('ArrowUp') === true || keyIsDown('w') === true) {
-    theY = height - terrain[theX].h - 15;
-    let jump ={
-      gravity: 0.6,
-      velocity: 0,
-      lift: 15,
-    };
-    jump.velocity - jump.lift;
-  }
+   if (keyIsDown('ArrowUp') === true || keyIsDown('w') === true) {
+     theY = height - terrain[theX].h - 15;
+   }
   if (keyIsDown('ArrowRight') === true || keyIsDown('d') === true) {
     
     theY = height - terrain[theX].h - 15;
@@ -142,8 +155,36 @@ function moveCharacter() {
   }
 }
 
+function gameOver() {
+  push();
 
+  noStroke();
+  fill(32);
+  rectMode(CENTER);
+  rect(width/2, height/2, 300, 300);
+  fill(255);
+  highScore = max(score, highScore);
+  storeItem('high score', highScore);
+  text(
+    `Game over!
+Your score: ${score}
+High score: ${highScore}
+Click to play again.`,
+    width / 2,
+    height / 2
+  );
+  gameStarted = false;
+  noLoop();
 
+  pop();
+}
+
+ function howLong(){
+   if (millis() === 30000){
+    gameOver();
+   }
+ }
+ 
 function spawnRectangle(leftSide, rectWidth, rectHeight) {
   let theRect = {
     x: leftSide,
