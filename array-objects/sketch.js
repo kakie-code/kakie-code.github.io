@@ -1,7 +1,18 @@
 // Oct. 7th
 // Hawraa Al Ibrahim
 // 
+// extra for experts:
+//  - i used "storeItem" so i could use it for the highscore 
+// - i added a "getItem" so i could get the previous score from the "storeItem"
+// - i used "rectMode(CENTER)" to make the rectangle draw from the center and not the corner
+// - used "dist" to find out the distance between two points 
+// - i also used "text" to explain to the player what to do
+// - i used ceil to round a number up to the nearest integer
+// - i used filter, it iterates over each element of an array
 
+
+
+// defining variables
 let terrain = [];
 let NUMBER_OF_RECTS;
 let gameState = "start"; // "start", "playing",  or "over"
