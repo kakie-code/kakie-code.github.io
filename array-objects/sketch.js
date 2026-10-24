@@ -92,7 +92,7 @@ function fallingFruit() {
 
 function dropFruitIfNeeded(){
   if (millis() > lastDropTime + waitTime){
-    lastSwapTime = millis();
+    lastDropTime = millis();
     fallingFruit();
   }
 }
@@ -110,11 +110,11 @@ function generateTerrain() {
 }
 
 function checkForCollision() {
-  if ( theX <= 0 + r ) {
-    theX++;
+  if ( theX < r ) {
+    theX = r;
   }
-  if ( theX >= width - r){
-    theX--;
+  if ( theX > width - r - 1){
+    theX = width - r - 1;
   }
 }
 
