@@ -1,4 +1,5 @@
-// Oct. 7th
+// Oct. 26th
+// Arrays and Object notation assignment
 // Hawraa Al Ibrahim
 // 
 // extra for experts:
