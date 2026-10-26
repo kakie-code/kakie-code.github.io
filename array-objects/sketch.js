@@ -3,12 +3,9 @@
 // 
 // extra for experts:
 //  - i used "storeItem" so i could use it for the highscore 
-// - i added a "getItem" so i could get the previous score from the "storeItem"
-// - i used "rectMode(CENTER)" to make the rectangle draw from the center and not the corner
-// - used "dist" to find out the distance between two points 
-// - i also used "text" to explain to the player what to do
-// - i used ceil to round a number up to the nearest integer
-// - i used filter, it iterates over each element of an array
+// - i added a "getItem" so i could get the previous score from the "storeItem" 
+// - i used "ceil" to round a number up to the nearest integer
+// - i used "filter", it iterates over each element of an array
 
 
 
@@ -83,7 +80,7 @@ function showStartScreen() {
   rectMode(CENTER);
   rect(width/2, height/2, 300, 300, 20);
   fill(255);
-  textAlign(CENTER, CENTER)
+  textAlign(CENTER, CENTER);
   textSize(20);
   text(
     'Click to play.\nUse arrow keys to move.',
@@ -118,13 +115,13 @@ function showGameOverScreen() {
   rectMode(CORNER);
   if (mouseOnButton()){
     fill("limegreen");
-    }
+  }
   else {
-      fill("green");
-    }
-    rect(button.x, button.y, button.w, button.h, 10);
-    fill(255);
-    text("Play again", width/2, button.y + button.h/2);
+    fill("green");
+  }
+  rect(button.x, button.y, button.w, button.h, 10);
+  fill(255);
+  text("Play again", width/2, button.y + button.h/2);
 
   pop();
 }
@@ -213,7 +210,7 @@ function showScore() {
   textSize(24);
   let timeLeft = ceil((gameLength- (millis()-startTime)) / 1000);
   text(
-`Score: ${score} 
+    `Score: ${score} 
 Time: ${timeLeft}`,
     20,
     40
@@ -258,12 +255,12 @@ function doWeJump(){
 
 // how the character moves
 function moveCharacter() {
-   if (keyIsDown('ArrowUp') === true || keyIsDown('w') === true) {
-     if (onGround){
+  if (keyIsDown('ArrowUp') === true || keyIsDown('w') === true) {
+    if (onGround){
       velocityY -= jumpPower;
       onGround = false;
-     }
-   }
+    }
+  }
   if (keyIsDown('ArrowRight') === true || keyIsDown('d') === true) {
     theX += speed;
 
@@ -276,12 +273,12 @@ function moveCharacter() {
 
 // checks how long it has been since game started
 function howLong(){
-   if (millis() - startTime >= gameLength){
+  if (millis() - startTime >= gameLength){
     highScore = max(score, highScore);
     storeItem('high score', highScore);
     gameState = "over";
-   }
- }
+  }
+}
  
 // also for terrain
 function spawnRectangle(leftSide, rectWidth, rectHeight) {
