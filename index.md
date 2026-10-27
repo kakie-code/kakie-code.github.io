@@ -12,6 +12,7 @@
 - [Collision Library Demo](09-collision)
 - [Randomized Art](10-art)
 - [Images and Sound fx](11-loading-assets)
+-[Grid demo](12-grid)
 
 ## Projects
 - [Interactive Scene](scene)
