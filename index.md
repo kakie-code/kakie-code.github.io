@@ -18,3 +18,4 @@
 ## Projects
 - [Interactive Scene](scene)
 - [Arrays and Object Notation](array-objects)
+- [2D Grid-Based Game Assignment](2d-grid)
