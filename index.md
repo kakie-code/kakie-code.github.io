@@ -16,6 +16,7 @@
 - [Rectangular grid](13-rectgrid)
 - [Game of Life](14-life)
 
+
 ## Projects
 - [Interactive Scene](scene)
 - [Arrays and Object Notation](array-objects)
