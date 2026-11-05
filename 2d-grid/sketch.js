@@ -1,7 +1,9 @@
 // 2D Grid-based game assignment
 // Hawraa Alibrahim
 // Oct 29th
-// im so confused. 
+// used this tutorial to better understand grids: 
+// 'p5.js Coding Tutorial | 2D Grid w Nested Loop' https://www.youtube.com/watch?v=UKxB2j4h7Ag 
+// 'p5.js Coding Tutorial | Color Grid (Nested Loop / 2D Array)' https://www.youtube.com/watch?v=3j_cr44OZTc 
 // Extra for Experts:
 // - not sure yet
 
@@ -20,7 +22,6 @@ async function setup() {
   else {
     cellSize = height / SQUARE_DIMENSIONS;
   }
-  grid = randomizeGrid(SQUARE_DIMENSIONS, SQUARE_DIMENSIONS);
 }
 
 function draw() {
@@ -32,42 +33,27 @@ function draw() {
 function showGrid() {
   for (let y = 0; y < SQUARE_DIMENSIONS; y++) {
     for (let x = 0; x < SQUARE_DIMENSIONS; x++) {
-      fill("white");
-      square(x * cellSize, y * cellSize, cellSize);
+      circle(x * cellSize + cellSize/2, y * cellSize + cellSize/2, cellSize);
+      
+      
     }
   }
-}
-
-function randomizeGrid(cols, rows) {
-  let newGrid = [];
-  for (let y = 0; y < rows; y++) {
-    newGrid.push([]);
-    for (let x = 0; x < cols; x++) {
-      if (random(100) < 50) {
-        newGrid[y].push(0);
-      }
-      else {
-        newGrid[y].push(1);
-      }
-    }
-  }
-  return newGrid;
 }
 
 function mousePressed(){
   let x = Math.floor(mouseX/cellSize);
   let y = Math.floor(mouseY/cellSize);
-  toggleCell(x,y);
+  toggleCell(x, y);
 }
 
 function toggleCell(x, y) {
   //make sure you're in the grid
   if (x >= 0 && x < cols && y >= 0 && y < rows) {
     if (grid[y][x] === 0) {
-      grid[y][x] = 1;
+      fill("white");
     }
     else if (grid[y][x] === 1) {
-      grid[y][x] = 0;
+      fill("black");
     }
   }
 }
