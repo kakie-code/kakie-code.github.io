@@ -16,6 +16,7 @@
 - [Rectangular grid](13-rectgrid)
 - [Game of Life](14-life)
 - [Character in Grid](15-character)
+- [setTimeout](16-set-timeout)
 
 ## Projects
 - [Interactive Scene](scene)
