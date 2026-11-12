@@ -10,53 +10,48 @@
 // - not sure yet
 
 //if randomizing the grid
-const SQUARE_DIMENSIONS = 10;
 let grid;
-let cellSize;
+let spacing;
+let size = []; 
 let rows;
 let cols;
+let theColor;
+let scale = 0.1;
 
 async function setup() {
   createCanvas(windowWidth, windowHeight);
-  if (width < height) {
-    cellSize = width / SQUARE_DIMENSIONS;
-  }
-  else {
-    cellSize = height / SQUARE_DIMENSIONS;
-  }
+  cols = width/spacing;
+  rows = height/spacing;
+  rectMode(CENTER);
+  
+
+  window.setInterval(changeColor, 500); 
 }
 
 function draw() {
   background(220);
   showGrid();
-  
+
+  for (let y = 0; y < cols; y++) {
+    size[y] = [];
+    for (let x = 0; x < rows; x++) {
+      size[y][x] = dist(mouseX, mouseY,spacing/2 + y * spacing,spacing/2 + x * spacing) * scale;
+    }
+  }
+}
+
+function changeColor(){
+  theColor = color(random(255), random (255), random(255));
 }
 
 function showGrid() {
-  for (let y = 0; y < SQUARE_DIMENSIONS; y++) {
-    for (let x = 0; x < SQUARE_DIMENSIONS; x++) {
-      circle(x * cellSize + cellSize/2, y * cellSize + cellSize/2, cellSize);
-      let randomColor = random(0, 255);
-      fill(randomColor);
-      
+  for (let y = 0; y < cols; y++) {
+    for (let x = 0; x < rows; x++) {
+      rect(spacing/2 + x * spacing,spacing/2 + y * spacing, size[y][x], size[y][x]);
+      fill(theColor);
     }
   }
 }
 
-function mousePressed(){
-  let x = Math.floor(mouseX/cellSize);
-  let y = Math.floor(mouseY/cellSize);
-  toggleCell(x, y);
-}
 
-function toggleCell(x, y) {
-  //make sure you're in the grid
-  if (x >= 0 && x < cols && y >= 0 && y < rows) {
-    if (grid[y][x] === 0) {
-      fill("white");
-    }
-    else if (grid[y][x] === 1) {
-      fill("black");
-    }
-  }
-}
+
