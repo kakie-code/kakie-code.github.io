@@ -17,6 +17,7 @@
 - [Game of Life](14-life)
 - [Character in Grid](15-character)
 - [setTimeout](16-set-timeout)
+- [setInterval](17-set-interval)
 
 ## Projects
 - [Interactive Scene](scene)
