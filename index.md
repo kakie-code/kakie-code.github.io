@@ -19,6 +19,7 @@
 - [setTimeout](16-set-timeout)
 - [setInterval](17-set-interval)
 
+
 ## Projects
 - [Interactive Scene](scene)
 - [Arrays and Object Notation](array-objects)
