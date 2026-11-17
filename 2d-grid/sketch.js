@@ -62,7 +62,7 @@ function showStartScreen() {
   rect(width/2, height/2, 300, 300);
   fill(255);
   text(
-    'Click to play.\nUse arrow keys to move.',
+    'Click to play.\n Move mouse and click when you find the objects',
     width / 2,
     height / 2
   );
@@ -101,6 +101,54 @@ function showGrid() {
   }
 }
 
+// shows that you lost the game
+function gameOver() {
+  noStroke();
+  fill(32);
+  rectMode(CENTER);
+  rect(width/2, height/2, 300, 300);
+  fill(255);
+  highScore = max(score, highScore);
+  storeItem('high score', highScore);
+  text(
+    `Game over!
+Your score: ${score}
+High score: ${highScore}
+Click to play again.`,
+    width / 2,
+    height / 2
+  );
+  gameStarted = false;
+  noLoop();
+}
+
+// asks if you won and if so then shows your score and ends the game 
+function didYouWin(){
+  if ( w >= width){
+    noStroke();
+    fill(32);
+    rectMode(CENTER);
+    rect(width/2, height/2, 300, 300);
+    fill(255);
+    highScore = max(score, highScore);
+    storeItem('high score', highScore);
+    text(
+      `You Win!
+Your score: ${score}
+High score: ${highScore}
+Click to play again.`,
+      width / 2,
+      height / 2
+    );
+    gameStarted = false;
+    noLoop();
+    score = 0;
+    highScore = 0;
+    w = 20;
+    r = 10;
+    bgcolor = "green";
+  }
+}
 
 function checkForObject() {
   showObject();
