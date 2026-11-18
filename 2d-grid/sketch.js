@@ -6,6 +6,7 @@
 // 'p5.js Coding Tutorial | Color Grid (Nested Loop / 2D Array)' https://www.youtube.com/watch?v=3j_cr44OZTc 
 // tutorial to make a game:
 // 'p5.js Coding Tutorial | Interactive Grid with Mouse Location'https://www.youtube.com/watch?v=AVMSCFMCz9w 
+// used p5.js refrence map code for how to change the color of a circle based on how close the mouse is
 // Extra for Experts:
 // - not sure yet
 
@@ -20,15 +21,21 @@ let object;
 let gameStarted = false;
 let score = 0;
 let highScore;
+let radius = 20;
+let revealRadius = 100;
+let gameState = false;
 
 async function setup() {
   createCanvas(windowWidth, windowHeight);
   cols = width*2/spacing;
   rows = height*2/spacing;
+  highScore = getItem('high score');
   rectMode(CENTER);
   
 
   window.setInterval(changeColor, 1000); 
+  window.setTimeout(gameOver, 60000);
+  
 }
 
 function draw() {
@@ -42,17 +49,24 @@ function draw() {
   }
 
 
-  if (gameStarted === false){
+  if (gameStarted === false && gameState === false){
     showStartScreen();
 
   }
   else {
     showGrid();
-    checkForObject();
+    showObject();
 
   }
 
 }
+
+function changeGameState(){
+  
+}
+
+
+
 
 // shows start screen 
 function showStartScreen() {
@@ -62,7 +76,7 @@ function showStartScreen() {
   rect(width/2, height/2, 300, 300);
   fill(255);
   text(
-    'Click to play.\n Move mouse and click when you find the objects',
+    'Click to play.\nMove mouse and click \nwhen you find the objects',
     width / 2,
     height / 2
   );
@@ -74,13 +88,16 @@ function mousePressed() {
     startGame();
   }
   else {
-    // placeholder
+    if ( dist(mouseX, mouseY, cx, cy) < 5) {
+      score += 1;
+      updateObjectCoordinates();
+    }
   }
 } 
 
 // starts game 
 function startGame() {
-  updateFruitCoordinates();
+  updateObjectCoordinates();
   gameStarted = true;
   loop();
   score = 0;
@@ -120,47 +137,15 @@ Click to play again.`,
   );
   gameStarted = false;
   noLoop();
-}
-
-// asks if you won and if so then shows your score and ends the game 
-function didYouWin(){
-  if ( w >= width){
-    noStroke();
-    fill(32);
-    rectMode(CENTER);
-    rect(width/2, height/2, 300, 300);
-    fill(255);
-    highScore = max(score, highScore);
-    storeItem('high score', highScore);
-    text(
-      `You Win!
-Your score: ${score}
-High score: ${highScore}
-Click to play again.`,
-      width / 2,
-      height / 2
-    );
-    gameStarted = false;
-    noLoop();
-    score = 0;
-    highScore = 0;
-    w = 20;
-    r = 10;
-    bgcolor = "green";
-  }
-}
-
-function checkForObject() {
-  showObject();
-  if ( dist(mouseX, mouseY, cx, cy) < 5) {
-    score += 1;
-    updateObjectCoordinates();
-  }
+  score = 0;
+  highScore = 0;
 }
 
 function showObject() {
-  if (dist(mouseX, mouseY, cx, cy) < 20){
-    object = circle(cx, cy, r);
+  if (dist(mouseX, mouseY, cx, cy) < revealRadius){
+    let c = map(mouseX, 0, 100, 0, 255);
+    fill(c);
+    object = circle(cx, cy, radius);
   }
 }
 
