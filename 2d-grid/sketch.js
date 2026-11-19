@@ -34,7 +34,7 @@ async function setup() {
   
 
   window.setInterval(changeColor, 1000); 
-  window.setTimeout(gameOver, 60000);
+  
   
 }
 
@@ -53,6 +53,10 @@ function draw() {
     showStartScreen();
 
   }
+  else if (gameState === true){
+    gameOver();
+  }
+
   else {
     showGrid();
     showObject();
@@ -62,7 +66,9 @@ function draw() {
 }
 
 function changeGameState(){
-  
+  if (window.setTimeout(gameOver, 6000)){
+    gameState = true;
+  }
 }
 
 
