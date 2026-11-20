@@ -9,7 +9,7 @@
 // used p5.js refrence map code for how to change the color of a circle based on how close the mouse is
 // Extra for Experts:
 // - not sure yet
-
+// fix gamestate thing
 
 let spacing = 20;
 let size = []; 
@@ -34,7 +34,7 @@ async function setup() {
   
 
   window.setInterval(changeColor, 1000); 
-  
+  window.setTimeout(show, 6000);
   
 }
 
@@ -53,9 +53,6 @@ function draw() {
     showStartScreen();
 
   }
-  else if (gameState === true){
-    gameOver();
-  }
 
   else {
     showGrid();
@@ -65,11 +62,9 @@ function draw() {
 
 }
 
-function changeGameState(){
-  if (window.setTimeout(gameOver, 6000)){
-    gameState = true;
-  }
-}
+
+
+
 
 
 
@@ -142,6 +137,7 @@ Click to play again.`,
     height / 2
   );
   gameStarted = false;
+  gameState = true;
   noLoop();
   score = 0;
   highScore = 0;
