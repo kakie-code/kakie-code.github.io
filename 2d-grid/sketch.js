@@ -8,8 +8,7 @@
 // 'p5.js Coding Tutorial | Interactive Grid with Mouse Location'https://www.youtube.com/watch?v=AVMSCFMCz9w 
 // used p5.js refrence map code for how to change the color of a circle based on how close the mouse is
 // Extra for Experts:
-// - not sure yet
-// fix gamestate thing
+// - i used map so that i could make the circles appear when the mouse gets close
 
 let spacing = 20;
 let size = []; 
@@ -24,17 +23,28 @@ let highScore;
 let radius = 20;
 let revealRadius = 100;
 let gameState = false;
+let gameTimer;
 
 async function setup() {
   createCanvas(windowWidth, windowHeight);
   cols = width*2/spacing;
   rows = height*2/spacing;
-  highScore = getItem('high score');
+
+  let savedHigh = getItem('high score');
+  if (savedHigh !== null){
+    highScore = savedHigh;
+  }
+  else {
+    highScore = 0;
+  }
+
   rectMode(CENTER);
+  textAlign(CENTER, CENTER);
+  textSize(18);
   
 
   window.setInterval(changeColor, 1000); 
-  window.setTimeout(show, 6000);
+  
   
 }
 
@@ -54,6 +64,10 @@ function draw() {
 
   }
 
+  else if (gameStarted === false && gameState === true) {
+    gameOver();
+  }
+
   else {
     showGrid();
     showObject();
@@ -62,12 +76,11 @@ function draw() {
 
 }
 
+function changeGameState(){
+  gameState = true
+  gameStarted = false;
 
-
-
-
-
-
+}
 
 // shows start screen 
 function showStartScreen() {
@@ -85,11 +98,11 @@ function showStartScreen() {
 }
 
 function mousePressed() {
-  if (gameStarted === false) {
+  if (gameStarted === false ) {
     startGame();
   }
   else {
-    if ( dist(mouseX, mouseY, cx, cy) < 5) {
+    if ( dist(mouseX, mouseY, cx, cy) <= ((radius/ 2) + 4)) {
       score += 1;
       updateObjectCoordinates();
     }
@@ -100,8 +113,12 @@ function mousePressed() {
 function startGame() {
   updateObjectCoordinates();
   gameStarted = true;
-  loop();
+  gameState = false;
   score = 0;
+
+  clearTimeout(gameTimer)
+  gameTimer = window.setTimeout(changeGameState, 60000); 
+  loop();
 }
 
 
@@ -121,6 +138,7 @@ function showGrid() {
 
 // shows that you lost the game
 function gameOver() {
+  clearTimeout(gameTimer)
   noStroke();
   fill(32);
   rectMode(CENTER);
@@ -140,7 +158,7 @@ Click to play again.`,
   gameState = true;
   noLoop();
   score = 0;
-  highScore = 0;
+  
 }
 
 function showObject() {
