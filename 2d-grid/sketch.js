@@ -77,7 +77,7 @@ function draw() {
 }
 
 function changeGameState(){
-  gameState = true
+  gameState = true;
   gameStarted = false;
 
 }
@@ -102,7 +102,7 @@ function mousePressed() {
     startGame();
   }
   else {
-    if ( dist(mouseX, mouseY, cx, cy) <= ((radius/ 2) + 4)) {
+    if ( dist(mouseX, mouseY, cx, cy) <= radius/ 2 + 4) {
       score += 1;
       updateObjectCoordinates();
     }
@@ -116,7 +116,7 @@ function startGame() {
   gameState = false;
   score = 0;
 
-  clearTimeout(gameTimer)
+  clearTimeout(gameTimer);
   gameTimer = window.setTimeout(changeGameState, 60000); 
   loop();
 }
@@ -138,7 +138,7 @@ function showGrid() {
 
 // shows that you lost the game
 function gameOver() {
-  clearTimeout(gameTimer)
+  clearTimeout(gameTimer);
   noStroke();
   fill(32);
   rectMode(CENTER);
