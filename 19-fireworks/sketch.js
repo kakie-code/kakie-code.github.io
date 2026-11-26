@@ -28,6 +28,7 @@ class Particle{
     this.y += this.dy;
 
     //fade away
+    this.opacity--;
   }
 }
 
