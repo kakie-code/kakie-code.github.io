@@ -30,6 +30,10 @@ class Particle{
     //fade away
     this.opacity--;
   }
+
+  isDead(){
+    return this.opacity <= 0;
+  }
 }
 
 let theFireworks = [];
@@ -42,9 +46,17 @@ async function setup() {
 function draw() {
   background("black");
   for (let firework of theFireworks){
-    firework.update();
-    firework.display();
+    if (firework.isDead()){
+      //remove it
+      let index = theFireworks.indexOf(firework);
+      theFireworks.splice(index, 1);
+    }
 
+    else {
+      firework.update();
+      firework.display();
+
+    }
   }
 }
 
